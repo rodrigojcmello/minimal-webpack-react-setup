@@ -1,0 +1,25 @@
+# Npm
+node_modules
+package-lock.json
+
+# Yarn
+yarn.lock
+
+# Yarn 2
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# IDE
+.idea
+
+# Generated after build
+src/routes/style.css.d.ts
+
+# Release
+dist
+
+.vercel

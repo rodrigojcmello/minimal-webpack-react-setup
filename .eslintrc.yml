@@ -1,0 +1,126 @@
+env:
+  node: true
+
+extends:
+  - airbnb-base
+  - plugin:prettier/recommended
+  - prettier
+
+plugins:
+  - prettier
+  - unicorn
+
+overrides:
+  - files:
+      - "**/*.ts"
+      - "**/*.tsx"
+
+    env:
+      browser: true
+      es2020: true
+      jest: true
+      node: false
+
+    parser: '@typescript-eslint/parser'
+
+    parserOptions:
+      # TypeScript
+      project: tsconfig.json
+
+      # JavaScript
+      ecmaVersion: 2021
+      sourceType: module
+
+      # React
+      ecmaFeatures:
+        jsx: true
+
+    extends:
+      # JavaScript and React
+      - airbnb
+      - airbnb/hooks
+      - plugin:unicorn/recommended
+
+      # Jest-dom
+      - plugin:jest-dom/recommended
+
+      # TypeScript
+      - 'plugin:@typescript-eslint/recommended'
+      - plugin:import/typescript
+
+      # Prettier
+      - plugin:prettier/recommended
+      - prettier
+      - prettier/react
+      - 'prettier/@typescript-eslint'
+
+    rules:
+      # ------------------------------------------------------------------------
+      # JavaScript
+      # ------------------------------------------------------------------------
+
+      # Enable pascalCase for React components
+      unicorn/filename-case:
+        - error
+        - cases:
+            kebabCase: true
+            pascalCase: true
+            camelCase: true
+
+      # Maximum 300 lines in a file
+      max-lines: error
+
+      # Not friendly to refactorings
+      import/prefer-default-export: off
+
+      # Abbreviations are commonly known, so there is no need to avoid them
+      unicorn/prevent-abbreviations: off
+
+      # TypeScript validates it
+      no-use-before-define: off
+
+      # ------------------------------------------------------------------------
+      # TypeScript
+      # ------------------------------------------------------------------------
+
+      # Resolves TypeScript extensions
+      import/extensions:
+        - error
+        - extensions:
+            - ".ts"
+            - ".tsx"
+
+      # ------------------------------------------------------------------------
+      # React / JSX
+      # ------------------------------------------------------------------------
+
+      # Enable tsx files for React components
+      react/jsx-filename-extension:
+        - error
+        - extensions:
+            - ".tsx"
+
+      # Not required in React 17 with @babel/preset-react runtime = 'automatic'
+      react/react-in-jsx-scope: off
+
+      # JSX Spread Attributes have an interface in TypeScript that helps us
+      #  to identify their values
+      react/jsx-props-no-spreading: off
+
+      # Unnecessary with TypeScript
+      react/prop-types: off
+      react/require-default-props: off
+
+      # ------------------------------------------------------------------------
+      # Tests
+      # ------------------------------------------------------------------------
+
+      # Import exception to tests
+      import/no-extraneous-dependencies:
+        - error
+        - devDependencies:
+            - "**/*.test.tsx"
+            - "**/setupTests.ts"
+
+
+
